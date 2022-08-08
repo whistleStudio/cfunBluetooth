@@ -1,0 +1,25 @@
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.flex-row-center {
+	display: flex;
+	align-items: center;
+}
+.flex-col-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.plh {
+	color: rgb(150,150,150);
+}

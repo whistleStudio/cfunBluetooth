@@ -1,1 +1,1 @@
-<view></view>
+<view><view class="head"><text>关闭</text><switch/></view></view>

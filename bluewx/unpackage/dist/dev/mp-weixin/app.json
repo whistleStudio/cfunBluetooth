@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/joystick/joystick",
+    "pages/custom/custom"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -8,6 +10,47 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#4dc7f1",
+    "borderStyle": "#eee",
+    "backgroundColor": "#ffffff",
+    "iconfontSrc": "style/font/iconfont.ttf",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "蓝牙连接",
+        "iconfont": {
+          "text": "",
+          "selectedText": "",
+          "fontSize": "17px",
+          "color": "#000000",
+          "selectedColor": "#4dc7f1"
+        }
+      },
+      {
+        "pagePath": "pages/joystick/joystick",
+        "text": "模拟手柄",
+        "iconfont": {
+          "text": "",
+          "selectedText": "",
+          "fontSize": "17px",
+          "color": "#000000",
+          "selectedColor": "#4dc7f1"
+        }
+      },
+      {
+        "pagePath": "pages/custom/custom",
+        "text": "自定义",
+        "iconfont": {
+          "text": "",
+          "selectedText": "",
+          "fontSize": "17px",
+          "color": "#000000",
+          "selectedColor": "#4dc7f1"
+        }
+      }
+    ]
+  },
+  "usingComponents": {}
 }
