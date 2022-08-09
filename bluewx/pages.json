@@ -34,46 +34,30 @@
 	"tabBar": {
 		"color": "#7A7E83",
 		"selectedColor": "#4dc7f1",
-		"borderStyle": "#eee",
+		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"height": "55px",
 		"fontSize": "10px",
-		"iconWidth": "24px",
-		"spacing": "0px",
-		"iconfontSrc": "style/font/iconfont.ttf",
+		"iconWidth": "20px",
+		"spacing": "3px",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
 				"text": "蓝牙连接",
-				"iconfont": {// 优先级高于 iconPath，该属性依赖 tabbar 根节点的 iconfontSrc
-					"text": "\ue642",
-					"selectedText": "\ue642",
-					"fontSize": "17px",
-					"color": "#000000",
-					"selectedColor": "#4dc7f1"
-				}
+				"iconPath": "static/font/icon-bt.png",
+				"selectedIconPath": "static/font/icon-bt2.png"
 			},
 			{
 				"pagePath": "pages/joystick/joystick",
 				"text": "模拟手柄",
-				"iconfont": {// 优先级高于 iconPath，该属性依赖 tabbar 根节点的 iconfontSrc
-					"text": "\ue61f",
-					"selectedText": "\ue61f",
-					"fontSize": "17px",
-					"color": "#000000",
-					"selectedColor": "#4dc7f1"
-				}
+				"iconPath": "static/font/icon-joystick.png",
+				"selectedIconPath": "static/font/icon-joystick2.png"
 			},
 			{
 				"pagePath": "pages/custom/custom",
 				"text": "自定义",
-				"iconfont": {// 优先级高于 iconPath，该属性依赖 tabbar 根节点的 iconfontSrc
-					"text": "\ue6a1",
-					"selectedText": "\ue6a1",
-					"fontSize": "17px",
-					"color": "#000000",
-					"selectedColor": "#4dc7f1"
-				}
+				"iconPath": "static/font/icon-custom.png",
+				"selectedIconPath": "static/font/icon-custom2.png"
 			}
 		]
 	},

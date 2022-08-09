@@ -13,6 +13,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shangxiazuoyouTriangle11:before {
+  content: "\e690";
+}
+
+.icon-shangxiazuoyouTriangle13:before {
+  content: "\e691";
+}
+
+.icon-shangxiazuoyouTriangle12:before {
+  content: "\e692";
+}
+
+.icon-shangxiazuoyouTriangle14:before {
+  content: "\e693";
+}
+
+.icon-lianjie:before {
+  content: "\e612";
+}
+
 .icon-youxijishoubing:before {
   content: "\e61f";
 }

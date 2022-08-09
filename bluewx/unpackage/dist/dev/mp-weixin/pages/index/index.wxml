@@ -1,1 +1,1 @@
-<view><view class="head"><text>关闭</text><switch/></view></view>
+<view><view class="top"><view class="head flex-row-center pdlr20"><text>蓝牙</text><switch color="#4dc7f1" bindchange="{{a}}"/></view><text class="pdlr20">设备列表</text></view><view class="dev-list"><view wx:if="{{b}}" class="dev-list-ul"><view wx:for="{{c}}" wx:for-item="v" wx:key="a" class="flex-row-center pdlr20"><text>cfun</text><view class="{{['icon-lianjie', 'iconfont']}}"></view></view></view></view></view>

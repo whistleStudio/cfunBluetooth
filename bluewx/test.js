@@ -1,21 +1,15 @@
-let a = 1
+function a () {
+	return new Promise((rsv, rej) =>{
+		setTimeout(() => {
+			console.log("xxxx")
+			rej("error")
+		}, 2000)
+	}) 
+}
 
-// {
-// 	let a = 2
-// 	function c () {
-// 		console.log(a)
-// 	}
-// }
-function b (obj) {
-	obj.fn()
-}
-{
-	a = 2
-	b({
-		fn(){
-			console.log(a)
-		}
-	})
-}
-a = 3
-// let a = 4
+;(async ()=>{
+	try {
+		await a ()
+	} catch(e)console.log(e)
+	console.log("over")
+})()
