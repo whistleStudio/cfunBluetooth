@@ -1,6 +1,9 @@
 "use strict";
 var common_vendor = require("../common/vendor.js");
 var bt = {
+  devId: void 0,
+  svId: void 0,
+  chaId: void 0,
   init() {
     return new Promise((rsv, rej) => {
       common_vendor.index.openBluetoothAdapter({
@@ -29,6 +32,60 @@ var bt = {
       });
     });
   },
+  async connectDev(devId) {
+    this.devId = devId;
+    try {
+      await createConnect(this.devId);
+      stopDevDiscovery();
+      this.svId = await getDevService(this.devId);
+      this.chaId = await getDevCharacteristics(this.devId, this.svId);
+      return true;
+    } catch (e) {
+    }
+  },
+  disconnectDev() {
+    if (this.devId) {
+      common_vendor.index.closeBLEConnection({
+        deviceId: this.devId,
+        success(res) {
+          console.log(res);
+        },
+        fail(e) {
+          console.log(e);
+        }
+      });
+    }
+  },
+  closeBtAdapter() {
+    common_vendor.index.closeBluetoothAdapter({
+      success(res) {
+        console.log(res);
+      }
+    });
+  },
+  writeBuffer(buf) {
+    common_vendor.index.writeBLECharacteristicValue({
+      deviceId: this.devId,
+      serviceId: this.svId,
+      characteristicId: this.chaId,
+      value: buf,
+      success(res) {
+        console.log("writeBLECharacteristicValue success", res.errMsg);
+      },
+      fail(err) {
+        console.log("writeBLECharacteristicValue fail: ", err);
+      }
+    });
+  },
+  onBtAdapterSta(cb = () => {
+  }) {
+    common_vendor.index.onBluetoothAdapterStateChange(function(res) {
+      if (!res.available) {
+        cb();
+        $hint("\u5F53\u524D\u84DD\u7259\u4E0D\u53EF\u7528");
+      }
+    });
+  },
   onFound(devList) {
     common_vendor.index.onBluetoothDeviceFound(function(res) {
       var _a;
@@ -36,11 +93,84 @@ var bt = {
         let dev = res.devices[0];
         console.log("new device list has founded");
         console.dir(res);
-        devList.push({ name: dev.name, id: dev.deviceId });
+        devList.push({ name: dev.name, deviceId: dev.deviceId });
       }
     });
   }
 };
+function createConnect(deviceId) {
+  return new Promise((rsv, rej) => {
+    common_vendor.index.createBLEConnection({
+      deviceId,
+      success(res) {
+        console.log(res);
+        rsv(res);
+      },
+      fail(e) {
+        rej(e);
+      }
+    });
+  });
+}
+function stopDevDiscovery() {
+  common_vendor.index.stopBluetoothDevicesDiscovery({
+    success(res) {
+      console.log(res);
+    }
+  });
+}
+function getDevService(deviceId) {
+  return new Promise((rsv, rej) => {
+    setTimeout(() => {
+      common_vendor.index.getBLEDeviceServices({
+        deviceId,
+        success(res) {
+          console.log("device services:", res.services);
+          let svId;
+          for (let v of res.services) {
+            if (v.isPrimary) {
+              svId = v.uuid;
+              break;
+            }
+          }
+          if (svId)
+            rsv(svId);
+          else
+            rej("no primary service");
+        },
+        fail(e) {
+          rej(e);
+        }
+      });
+    }, 1e3);
+  });
+}
+function getDevCharacteristics(deviceId, serviceId) {
+  return new Promise((rsv, rej) => {
+    common_vendor.index.getBLEDeviceCharacteristics({
+      deviceId,
+      serviceId,
+      success(res) {
+        var _a;
+        console.log("device getBLEDeviceCharacteristics:", res.characteristics);
+        let chaId;
+        for (let v of res.characteristics) {
+          if ((_a = v == null ? void 0 : v.properties) == null ? void 0 : _a.write) {
+            chaId = v.uuid;
+            break;
+          }
+        }
+        if (chaId)
+          rsv(chaId);
+        else
+          rej("no write characteristic");
+      },
+      fail(e) {
+        console.log(e);
+      }
+    });
+  });
+}
 function $hint(err, icon = "error") {
   common_vendor.index.showToast({
     title: err,

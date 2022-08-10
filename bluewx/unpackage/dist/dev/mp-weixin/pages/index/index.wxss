@@ -50,6 +50,11 @@
 .dev-list-ul {
   padding: 160rpx 0 calc(55px + 10rpx);
 }
+.dev-list-li {
+  line-height: 80rpx;
+  background-color: lightskyblue;
+  margin-bottom: 10rpx;
+}
 .dev-list {
   font: "微软雅黑", "Micosoft Yahei", "Micosoft YaHei", "sans-serif";
   box-sizing: border-box;

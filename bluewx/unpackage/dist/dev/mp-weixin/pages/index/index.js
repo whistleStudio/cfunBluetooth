@@ -6,13 +6,16 @@ const _sfc_main = {
   setup(__props) {
     let iState = common_vendor.reactive({
       isBtInit: false,
-      devList: []
+      devList: [],
+      actId: -1,
+      mode: -1
     });
     function switchChange(ev) {
       if (ev.detail.value) {
         btInit();
-      } else
-        iState.isBtInit = false;
+      } else {
+        devDis();
+      }
     }
     async function btInit() {
       try {
@@ -23,8 +26,30 @@ const _sfc_main = {
         console.log(e);
       }
     }
+    function devClick(i, devId) {
+      if (iState.actId != i) {
+        utils_bt.bt.disconnectDev();
+        iState.actId = i;
+        console.log("connect", devId);
+        (async () => {
+          iState.mode = 0;
+          await utils_bt.bt.connectDev(devId);
+          iState.mode = 1;
+        })();
+      }
+    }
+    function devDis() {
+      iState.isBtInit = false;
+      iState.actId = -1;
+      iState.mode = -1;
+      iState.devList.length = 0;
+      utils_bt.bt.closeBtAdapter();
+    }
     common_vendor.onMounted(() => {
       utils_bt.bt.onFound(iState.devList);
+      utils_bt.bt.onBtAdapterSta(() => {
+        devDis();
+      });
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -32,9 +57,16 @@ const _sfc_main = {
         b: common_vendor.unref(iState).isBtInit
       }, common_vendor.unref(iState).isBtInit ? {
         c: common_vendor.f(common_vendor.unref(iState).devList, (v, i, i0) => {
-          return {
-            a: i
-          };
+          return common_vendor.e({
+            a: common_vendor.t(v.name),
+            b: common_vendor.unref(iState).actId == i
+          }, common_vendor.unref(iState).actId == i ? {
+            c: common_vendor.unref(iState).mode == 0 ? 1 : "",
+            d: common_vendor.unref(iState).mode == 1 ? 1 : ""
+          } : {}, {
+            e: i,
+            f: common_vendor.o(($event) => devClick(i, v.deviceId), i)
+          });
         })
       } : {});
     };

@@ -3,16 +3,16 @@
 		<view class="top">
 			<view class="head flex-row-center pdlr20">
 				<text>蓝牙</text>
-				<switch color="#4dc7f1" @change="switchChange"/>
+				<switch color="#4dc7f1" @change="switchChange" />
 			</view>
 			<text class="pdlr20">设备列表</text>
 		</view>
 
 		<view class="dev-list">
 			<ul v-if="iState.isBtInit" class="dev-list-ul">
-				<li v-for="(v,i) in iState.devList" :key="i" class="flex-row-center pdlr20">
-					<text>cfun</text>
-					<view :class="{connecting: 0, 'icon-lianjie': 1}" class="iconfont">
+				<li v-for="(v,i) in iState.devList" :key="i" @click="devClick(i, v.deviceId)" class="flex-row-center pdlr20 dev-list-li">
+					<text>{{v.name}}</text>
+					<view v-if="iState.actId == i" :class="{connecting: iState.mode==0, 'icon-lianjie': iState.mode==1}" class="iconfont">
 						
 					</view>
 				</li>
@@ -26,25 +26,55 @@
 	import bt from "@/utils/bt.js"
 	
 	let iState = reactive({
-		isBtInit: false,
-		devList: []
+		isBtInit: false, 
+		devList: [],
+		actId: -1,
+		mode: -1
 	})
-	
+	/* 开关状态监控 */
 	function switchChange (ev) {
 		if (ev.detail.value) {
 			btInit()
-		} else iState.isBtInit = false
+		} else {
+			devDis()
+		}
 	}
-	
+	/* 蓝牙初始化 */
 	async function btInit () {
 		try {
 			if (await bt.init()) iState.isBtInit = true	
 			await bt.search()
 		}catch(e){console.log(e)}
 	}
+	/* 连接指定设备 */
+	function devClick (i, devId) {
+		if (iState.actId != i) {
+			bt.disconnectDev()
+			iState.actId = i
+			console.log("connect", devId)
+			;(async ()=>{
+				iState.mode = 0
+				await bt.connectDev(devId)
+				iState.mode = 1
+			})()
+		}
+		// bt.connectDev(devId)
+	}
+	/* 蓝牙断开时 */
+	function devDis () {
+		iState.isBtInit=false
+		iState.actId=-1
+		iState.mode=-1
+		iState.devList.length = 0
+		bt.closeBtAdapter()
+	}
+	
 	
 	onMounted(()=>{
 		bt.onFound(iState.devList)
+		bt.onBtAdapterSta(()=>{
+			devDis()
+		})
 	})
 </script>
 
@@ -77,6 +107,11 @@
 	}
 	.dev-list-ul {
 		padding: calc(150rpx + 10rpx) 0 calc(55px + 10rpx);
+	}
+	.dev-list-li {
+		line-height: 80rpx;
+		background-color: lightskyblue;
+		margin-bottom: 10rpx;
 	}
 	.dev-list {
 		font: $fontF;
