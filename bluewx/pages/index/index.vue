@@ -54,8 +54,9 @@
 			console.log("connect", devId)
 			;(async ()=>{
 				iState.mode = 0
-				await bt.connectDev(devId)
-				iState.mode = 1
+				//---------- 设备连接异常时, 待调整 --------------
+				if(await bt.connectDev(devId)) iState.mode = 1
+				else {iState.actId=-1;iState.mode=-1}
 			})()
 		}
 		// bt.connectDev(devId)
@@ -105,14 +106,6 @@
 			color: white;
 		}
 	}
-	.dev-list-ul {
-		padding: calc(150rpx + 10rpx) 0 calc(55px + 10rpx);
-	}
-	.dev-list-li {
-		line-height: 80rpx;
-		background-color: lightskyblue;
-		margin-bottom: 10rpx;
-	}
 	.dev-list {
 		font: $fontF;
 		box-sizing: border-box;
@@ -139,5 +132,14 @@
 				}
 			}
 		}
+	}
+	// --------小程序真机调试用------
+	.dev-list-ul {
+		padding: calc(150rpx + 10rpx) 0 calc(55px + 10rpx);
+	}
+	.dev-list-li {
+		line-height: 80rpx;
+		background-color: lightskyblue;
+		margin-bottom: 10rpx;
 	}
 </style>

@@ -1,1 +1,1 @@
-<view></view>
+<view class="joystick flex-col-center" style="{{'height:' + f}}"><movable-area class="axis"><movable-view class="axis-center" direction="all" animation="false" x="{{a}}" y="{{b}}" bindchange="{{c}}" bindtouchend="{{d}}"></movable-view><view class="arrow"></view></movable-area><view class="btn-group"><button bindtap="{{e}}">test</button></view></view>

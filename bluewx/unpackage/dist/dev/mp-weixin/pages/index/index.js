@@ -33,8 +33,12 @@ const _sfc_main = {
         console.log("connect", devId);
         (async () => {
           iState.mode = 0;
-          await utils_bt.bt.connectDev(devId);
-          iState.mode = 1;
+          if (await utils_bt.bt.connectDev(devId))
+            iState.mode = 1;
+          else {
+            iState.actId = -1;
+            iState.mode = -1;
+          }
         })();
       }
     }

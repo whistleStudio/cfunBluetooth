@@ -31,6 +31,7 @@ export default {
 			})
 		})
 	},
+	/* 设备连接 */
 	async connectDev (devId) {
 		this.devId = devId
 		try {

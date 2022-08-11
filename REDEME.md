@@ -36,3 +36,10 @@ a.c(()=>{
 - 不改变内存地址，清空数组方法: arr.length = 0
 - 【uniapp bug】switch checked属性 更改不刷新视图
 
+### [08111733]
+
+- 高度自适应 用 `uni.getSystemInfo(OBJECT)`, 获取其中windowHeight除去默认导航和tabbar
+- 【今日关键】绑定属性设置值时，如果前后两次值相同将不会触发vue视图刷新；多出现在非双向绑定的数据，事件改变了实际的值，但属性绑定的值还停留在之前的预设值，这个时候如果想还原预设值就会没效果,解决办法->>https://uniapp.dcloud.net.cn/tutorial/vue-api.html#componentsolutions[组件属性设置不生效解决办法], nextTick确保之前数据改变更新DOM后再更新
+- 打算仿农药做个虚拟手柄
+- 【uniapp bug】movable-view: x, y设置结合touchend有问题
+
