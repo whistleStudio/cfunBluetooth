@@ -43,3 +43,25 @@ a.c(()=>{
 - 打算仿农药做个虚拟手柄
 - 【uniapp bug】movable-view: x, y设置结合touchend有问题
 
+### [08121727]
+
+- 【注意】微信小程序貌似不支持vue的 属性 样式绑定对象变量写法
+
+```vue
+<template>
+<!-- wx无效 -->
+<view :style="vStyle" @click="w+=100"> </view>
+<!-- 这样可以 -->
+<view :style="{width: w}" @click="w+=100"> </view>
+</template>
+
+import {ref, reactive} from "vue"
+<script setup>
+  let w = ref(100)
+  const vStyle = reactive({
+    width: w + 'px'
+  })
+</script>
+```
+
+- 【问题】ref trigger

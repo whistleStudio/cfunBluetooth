@@ -5960,6 +5960,7 @@ exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f;
+exports.getCurrentInstance = getCurrentInstance;
 exports.index = index;
 exports.nextTick = nextTick;
 exports.o = o;
