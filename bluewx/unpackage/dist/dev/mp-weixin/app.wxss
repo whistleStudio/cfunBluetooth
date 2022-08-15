@@ -62,31 +62,31 @@
   content: "\e6a1";
 }
 ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 .flex-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .flex-row-center {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .flex-col-center {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .plh {
-	color: rgb(150,150,150);
+  color: #969696;
 }
 .pdlr20 {
- box-sizing: border-box;
- padding: 0 20rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
 }page{--status-bar-height:25px;--top-window-height:0px;--window-top:0px;--window-bottom:0px;--window-left:0px;--window-right:0px;--window-magin:0px}[data-c-h="true"]{display: none !important;}

@@ -1,0 +1,82 @@
+.joystick {
+	background: url("https://dict.cfunworld.com/img/public/joystickbg.png") center/cover no-repeat;
+	box-sizing: border-box;
+	// padding: 50rpx;
+	position: relative;
+	.axis {
+		width: 160px;
+		height: 160px;
+		background-color: rgba(255,255,255,0.05);
+		border: 1px solid rgba(255,255,255,0.15);
+		border-radius: 50%;
+		position: absolute;
+		left: 50px;
+		top: 40px;
+		.axis-center {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			background: url("@/static/joy-c.png") right center/contain no-repeat;
+			z-index: 9;
+		}
+		.arrow {
+			position: absolute;
+			width: 198px;
+			height: 198px;
+			background: url("@/static/joy_arrow.png") center/contain no-repeat;
+			left: 50%;
+			top: 50%;
+			z-index: 2;
+		}
+		.dir {
+			width: 138px;
+			height: 138px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			background: url("@/static/joy-dir.png") center/contain no-repeat;
+		}
+	}
+	.btn-group {
+		position: absolute;
+		bottom: 5px;
+		left: 50px;
+		width: 160px;
+		height: 220px;
+		z-index: 10;
+		.btn {
+			transform: rotate(90deg);
+			border-radius: 50%;
+			position: absolute;
+			text-align: center;
+			background-image: linear-gradient(-45deg, rgb(29,41,55), rgb(70,118,139));
+			color: rgba(255,255,255,0.8);
+			border: 2px solid rgba(200,200,230,0.1);
+			opacity: 0.6;
+			&:first-of-type {
+				line-height: 70px;
+				bottom: 40px;
+				width: 70px;
+				height: 70px;
+				font-size: 25px;
+			}
+			&:not(:first-of-type) {
+				width: 55px;
+				height: 55px;
+				line-height: 55px;
+			}
+			&:nth-of-type(3) {
+				left: 65px;
+				bottom: 120px;
+			}
+			&:last-of-type {
+				right: 0;
+				bottom: 50px;
+			}
+		}
+		.btnAct {
+			opacity: 1;
+		}
+	}
+}

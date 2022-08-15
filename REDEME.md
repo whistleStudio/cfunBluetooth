@@ -65,3 +65,11 @@ import {ref, reactive} from "vue"
 ```
 
 - 【问题】ref trigger
+
+### [08151728]
+
+-  放弃移动十字轴
+- 导入scss文件 直接import "" 不要加url()
+- useJoyAxis useJoyBtn 抽离；
+- 【待解决】蓝牙数据发送过快，接收端有积压，要加节流函数
+

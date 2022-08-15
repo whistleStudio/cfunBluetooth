@@ -1,1 +1,1 @@
-<view></view>
+<view><button bindtouchstart="{{a}}">1</button><button bindtouchstart="{{b}}">2</button><test u-i="e82d41f8-0" bind:__l="__l"></test></view>
