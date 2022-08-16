@@ -13,20 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-shangxiazuoyouTriangle11:before {
-  content: "\e690";
+.icon-pin:before {
+  content: "\e9f3";
 }
 
-.icon-shangxiazuoyouTriangle13:before {
-  content: "\e691";
-}
-
-.icon-shangxiazuoyouTriangle12:before {
-  content: "\e692";
-}
-
-.icon-shangxiazuoyouTriangle14:before {
-  content: "\e693";
+.icon-bianji:before {
+  content: "\e610";
 }
 
 .icon-lianjie:before {

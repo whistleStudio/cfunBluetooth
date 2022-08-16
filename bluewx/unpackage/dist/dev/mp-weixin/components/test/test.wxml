@@ -1,1 +1,0 @@
-<button bindtap="{{a}}">init</button><button bindtap="{{b}}">search</button><view class="dev-list"><view wx:for="{{c}}" wx:for-item="v" wx:key="d" bindtap="{{v.e}}"><text>{{v.a}} -- {{v.b}}</text><text wx:if="{{v.c}}">√</text></view></view>

@@ -71,8 +71,14 @@ import {ref, reactive} from "vue"
 -  放弃移动十字轴
 - 导入scss文件 直接import "" 不要加url()
 - useJoyAxis useJoyBtn 抽离；
-- 【待解决】蓝牙数据发送过快，接收端有积压，要加节流函数
+- 【待解决】蓝牙数据发送过快，接收端有积压，要加节流函数 √
 
 ### [08161138]
 
 - joystick页面功能基本OK
+
+### [08161741]
+
+- custom页面样式基本完成，模式切换没做
+- 【待解决】节流传参
+- 用了pinia做状态管理
