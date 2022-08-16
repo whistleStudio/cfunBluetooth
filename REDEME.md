@@ -73,3 +73,6 @@ import {ref, reactive} from "vue"
 - useJoyAxis useJoyBtn 抽离；
 - 【待解决】蓝牙数据发送过快，接收端有积压，要加节流函数
 
+### [08161138]
+
+- joystick页面功能基本OK

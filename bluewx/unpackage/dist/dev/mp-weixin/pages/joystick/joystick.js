@@ -6,8 +6,9 @@ require("../../utils/bt.js");
 const _sfc_main = {
   __name: "joystick",
   setup(__props) {
-    const { joySta, mvMove, mvStart, mvRelease, arrowPos } = hooks_useJoyAxis.useJoyAxis();
-    const { btnSta, btnTouchStart, btnTouchEnd } = hooks_useJoyBtn.useJoyBtn();
+    const btArr = [221, 119, 50, 50, 0, 0, 0, 0];
+    const { joySta, mvMove, mvStart, mvRelease, arrowPos } = hooks_useJoyAxis.useJoyAxis(btArr);
+    const { btnSta, btnTouchStart, btnTouchEnd } = hooks_useJoyBtn.useJoyBtn(btArr);
     let wH = common_vendor.ref(0);
     let wW = common_vendor.ref(0);
     common_vendor.onBeforeMount(() => {

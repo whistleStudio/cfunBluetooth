@@ -1,9 +1,10 @@
 "use strict";
 var common_vendor = require("../common/vendor.js");
 var utils_bt = require("../utils/bt.js");
-function useJoyAxis() {
+function useJoyAxis(btArr) {
   const D = 160, d = 70;
   const InitX = (D - d) / 2, InitY = (D - d) / 2;
+  let tim1 = 0, tim2 = 0;
   const joySta = common_vendor.reactive({
     x: InitX,
     y: InitY,
@@ -11,8 +12,7 @@ function useJoyAxis() {
     oldY: InitY,
     angle: 0,
     isArrowShow: false,
-    joyOpacity: 0.3,
-    btArr: [221, 119, 50, 50, 0, 0, 0, 0]
+    joyOpacity: 0.3
   });
   function mvMove(ev) {
     let { x, y, source } = ev.detail;
@@ -20,12 +20,15 @@ function useJoyAxis() {
     joySta.oldY = y;
     if (source === "touch") {
       arrowPos(x, y);
-      let btX = x / (D - d) * 100, btY = y / (D - d) * 100;
-      joySta.btArr[2] = btX;
-      joySta.btArr[3] = btY;
-      let buffer = new Uint8Array(joySta.btArr).buffer;
-      console.log(buffer);
-      utils_bt.bt.writeBuffer(buffer);
+      clearTimeout(tim1);
+      tim1 = setTimeout(() => {
+        let btX = x / (D - d) * 100, btY = y / (D - d) * 100;
+        btArr[2] = btY;
+        btArr[3] = btX;
+        let buffer = new Uint8Array(btArr).buffer;
+        console.log(buffer);
+        utils_bt.bt.writeBuffer(buffer);
+      }, 200);
     }
   }
   function mvStart() {
@@ -41,10 +44,13 @@ function useJoyAxis() {
       joySta.x = InitX;
       joySta.y = InitY;
     });
-    joySta.btArr[2] = 50;
-    joySta.btArr[3] = 50;
-    let buffer = new Uint8Array(joySta.btArr).buffer;
-    utils_bt.bt.writeBuffer(buffer);
+    clearTimeout(tim2);
+    tim2 = setTimeout(() => {
+      btArr[2] = 50;
+      btArr[3] = 50;
+      let buffer = new Uint8Array(btArr).buffer;
+      utils_bt.bt.writeBuffer(buffer);
+    }, 220);
   }
   function arrowPos(x, y) {
     x = x - InitX;

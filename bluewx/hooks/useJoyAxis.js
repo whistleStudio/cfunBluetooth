@@ -1,9 +1,13 @@
+/* joystick - axis */
 import {ref, reactive, nextTick} from "vue"
 import bt from "@/utils/bt.js"
 
-export default function () {
+export default function (btArr) {
 	const D=160, d=70
 	const InitX = (D-d)/2, InitY = (D-d)/2
+	let tim1 = 0, tim2 = 0//节流计时器
+	
+	
 	const joySta = reactive({
 		x: InitX,
 		y: InitY, 
@@ -12,7 +16,6 @@ export default function () {
 		angle: 0,
 		isArrowShow: false,
 		joyOpacity: 0.3,
-		btArr: [0xdd, 0x77, 50, 50, 0, 0, 0, 0]
 	})
 	
 	/* 十字轴移动 */
@@ -24,12 +27,15 @@ export default function () {
 		if (source==="touch") {
 			arrowPos(x, y)
 			//传蓝牙
-			let btX = x/(D-d)*100, btY = y/(D-d)*100
-			joySta.btArr[2] = btX
-			joySta.btArr[3] = btY
-			let buffer = new Uint8Array(joySta.btArr).buffer
-			console.log(buffer)
-			bt.writeBuffer(buffer)
+			clearTimeout(tim1)
+			tim1 = setTimeout(()=>{
+				let btX = x/(D-d)*100, btY = y/(D-d)*100
+				btArr[2] = btY
+				btArr[3] = btX
+				let buffer = new Uint8Array(btArr).buffer
+				console.log(buffer)
+				bt.writeBuffer(buffer)
+			},200)
 		}
 	}
 	/* 十字轴开始移动 */
@@ -48,10 +54,13 @@ export default function () {
 				joySta.y = InitY
 		})
 		//传蓝牙
-		joySta.btArr[2] = 50
-		joySta.btArr[3] = 50
-		let buffer = new Uint8Array(joySta.btArr).buffer
-		bt.writeBuffer(buffer)
+		clearTimeout(tim2)
+		tim2 = setTimeout(()=>{
+			btArr[2] = 50
+			btArr[3] = 50
+			let buffer = new Uint8Array(btArr).buffer
+			bt.writeBuffer(buffer)
+		},220)
 	}
 	/* 定位十字轴箭头位置 */
 	function arrowPos (x,y) {
