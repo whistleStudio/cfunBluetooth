@@ -17,17 +17,22 @@
 	import {ref,reactive,nextTick,onBeforeMount,onMounted} from "vue"
 	import useJoyAxis from "../../hooks/useJoyAxis.js"
 	import useJoyBtn from "../../hooks/useJoyBtn.js"
+	import {onHide,onShow} from '@dcloudio/uni-app'
+	import bt from "@/utils/bt.js"
 	
 	const btArr = [0xdd, 0x77, 50, 50, 0, 0, 0, 0]
 	const {joySta, mvMove, mvStart, mvRelease, arrowPos} = useJoyAxis(btArr)
 	const {btnSta, btnTouchStart, btnTouchEnd} = useJoyBtn(btArr)
-
+	
 	let wH = ref(0) //可使用窗口高度 Number
 	let wW = ref(0) //可使用窗口宽度
 	onBeforeMount(()=>{
 		const sysInfo = uni.getSystemInfoSync()
 		wH.value = sysInfo.windowHeight
 		wW.value = sysInfo.windowWidth
+	})
+	onShow(()=>{
+		bt.writeBuffer([0xdd, 0x77, 50, 50, 0, 0, 0, 0])
 	})
 </script>
 

@@ -1,0 +1,1 @@
+"use strict";var t=require("../common/vendor.js"),e={invLimit(e,i={inv:200}){let n=!0,o=0;return function(){n?e(...arguments):t.index.showToast({title:"跟不上你手速啦\n休息一会儿",icon:"none"}),n=!1,clearTimeout(o),o=setTimeout((()=>{n=!0}),i.inv)}}};exports.throttle=e;

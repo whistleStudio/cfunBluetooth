@@ -19,11 +19,18 @@
 			</ul>
 		</view>
 	</view>
+	<view class="bt-cartoon">
+		
+	</view>
 </template>
 
 <script setup>
 	import {reactive, toRefs, onMounted} from "vue"
+	import {onPullDownRefresh} from "@dcloudio/uni-app"
+	
+	// #ifdef MP-WEIXIN
 	import bt from "@/utils/bt.js"
+	// #endif
 	
 	let iState = reactive({
 		isBtInit: false, 
@@ -31,6 +38,7 @@
 		actId: -1,
 		mode: -1
 	})
+	// #ifdef MP-WEIXIN
 	/* 开关状态监控 */
 	function switchChange (ev) {
 		if (ev.detail.value) {
@@ -69,77 +77,36 @@
 		iState.devList.length = 0
 		bt.closeBtAdapter()
 	}
-	
-	
+	/* 初次加载 */
 	onMounted(()=>{
 		bt.onFound(iState.devList)
 		bt.onBtAdapterSta(()=>{
 			devDis()
 		})
 	})
+	/* 下拉刷新搜索开启, 3秒后关闭 */
+	onPullDownRefresh(()=>{
+		// bt.stopSearch()
+		if (iState.isBtInit) {
+			bt.search()
+			uni.showLoading({
+				title:"正在搜索新设备"
+			})
+			setTimeout(function () {
+				bt.stopSearch()
+				uni.stopPullDownRefresh()
+				uni.hideLoading()
+			}, 3000);
+		} else {
+			uni.stopPullDownRefresh()
+			uni.showToast({
+				title: "蓝牙未初始化",
+				icon: "error"
+			})
+		}
+
+	})
+	// #endif
 </script>
 
-
-<style lang="scss">
-	$gap: 10rpx;
-	.top {
-		width: 100%;
-		position: fixed;
-		background-color: white;
-		height: 150rpx;
-		box-sizing: border-box;
-		.head {
-			width: 100%;
-			height: 100rpx;
-			font: $fontF;
-			text {
-				color: $gray100;
-			}
-			switch {
-				margin-left: auto;
-			}
-		}
-		>text {
-			display: block;
-			font: 30rpx/50rpx $fontF;
-			background-color: $mainColor;
-			color: white;
-		}
-	}
-	.dev-list {
-		font: $fontF;
-		box-sizing: border-box;
-		ul {
-			// padding: calc(150rpx + $gap) 0 calc(55px + $gap);
-			li {
-				font: 35rpx/80rpx $fontF;
-				background-color: $gray250;
-				margin-bottom: 10rpx;
-				&:last-of-type {
-					margin-bottom: 0;
-				}
-				>view {
-					width: 60rpx;
-					height: 60rpx;
-					margin-left: auto;
-					margin-right: 15rpx;
-					font-size: 40rpx;
-					line-height: 60rpx;
-					color: $decorateColor;
-				}
-				.connecting {
-					background: url("@/static/font/connecting.gif") center/contain no-repeat;
-				}
-			}
-		}
-	}
-	// --------小程序真机调试用------
-	.dev-list-ul {
-		padding: calc(150rpx + 10rpx) 0 calc(55px + 10rpx);
-	}
-	.dev-list-li {
-		line-height: 80rpx;
-		background-color: lightskyblue;
-		margin-bottom: 10rpx;
-	}
-</style>
+<style lang="scss" src="./index.scss"></style>

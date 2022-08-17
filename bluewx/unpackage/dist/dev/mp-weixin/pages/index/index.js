@@ -55,6 +55,25 @@ const _sfc_main = {
         devDis();
       });
     });
+    common_vendor.onPullDownRefresh(() => {
+      if (iState.isBtInit) {
+        utils_bt.bt.search();
+        common_vendor.index.showLoading({
+          title: "\u6B63\u5728\u641C\u7D22\u65B0\u8BBE\u5907"
+        });
+        setTimeout(function() {
+          utils_bt.bt.stopSearch();
+          common_vendor.index.stopPullDownRefresh();
+          common_vendor.index.hideLoading();
+        }, 3e3);
+      } else {
+        common_vendor.index.stopPullDownRefresh();
+        common_vendor.index.showToast({
+          title: "\u84DD\u7259\u672A\u521D\u59CB\u5316",
+          icon: "error"
+        });
+      }
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.o(switchChange),

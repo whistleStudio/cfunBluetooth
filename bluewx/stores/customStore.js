@@ -4,7 +4,7 @@ export const useCustomStore = defineStore('custom', {
 	state: () => {
 		return {
 			staArr: Array(6).fill(0),
-			nameArr: ["按钮A", "按钮B", "按钮C", "按钮D", "滑杆X", "滑杆Y"]
+			nameArr: ["数据X", "数据Y","数据A", "数据B", "数据C", "数据D"]
 		}
 	}
 })

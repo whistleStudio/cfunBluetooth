@@ -23,13 +23,33 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.mode {
+  margin: 0 auto;
+  font-size: 35rpx;
+  width: 95%;
+  height: 100rpx;
+}
+.mode > text {
+  display: inline-block;
+  color: #646464;
+  line-height: 100rpx;
+  font-weight: bold;
+}
+.mode > button {
+  margin-left: 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #f0c471;
+  color: white;
+}
 .btn-group {
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   width: 100%;
   height: 500rpx;
   font-family: "微软雅黑", "Micosoft Yahei", "Micosoft YaHei", "sans-serif";
+  color: #646464;
 }
-.btn-group > ul {
+.btn-group .btn-group-ul {
   margin: 0 auto;
   width: 95%;
   padding: 20rpx;
@@ -40,38 +60,42 @@
   box-sizing: border-box;
   border-radius: 20rpx;
 }
-.btn-group > ul > li {
+.btn-group .btn-group-ul .btn-group-li {
   width: 45%;
   height: 200rpx;
 }
-.btn-group > ul > li .btn-edit {
+.btn-group .btn-group-ul .btn-group-li .btn-edit {
   width: 100%;
   line-height: 70rpx;
   font-size: 30rpx;
 }
-.btn-group > ul > li .btn-edit .edit-icon {
+.btn-group .btn-group-ul .btn-group-li .btn-edit .edit-icon {
   float: right;
   font-size: 40rpx;
   margin-right: 10rpx;
   color: #f0c471;
 }
-.btn-group > ul > li > button {
+.btn-group .btn-group-ul .btn-group-li > button {
   width: 100%;
   line-height: 80rpx;
   background-color: #4dc7f1;
   color: white;
   font-size: 40rpx;
 }
-.btn-group > ul > li .btn-hover {
+.btn-group .btn-group-ul .btn-group-li .btn-hover {
   box-shadow: 1px 1px 1px 1px gray inset;
   background-color: #49bee5;
+}
+.btn-group .btn-group-ul .btn-group-li > switch {
+  line-height: 80rpx;
 }
 .slider-group {
   margin-top: 50rpx;
   width: 100%;
   height: 400rpx;
+  color: #646464;
 }
-.slider-group > ul {
+.slider-group .slider-group-ul {
   margin: 0 auto;
   width: 95%;
   height: 100%;
@@ -80,23 +104,23 @@
   border-radius: 20rpx;
   box-sizing: border-box;
 }
-.slider-group > ul > li {
+.slider-group .slider-group-ul .slider-group-li {
   height: 160rpx;
   margin-bottom: 30rpx;
 }
-.slider-group > ul > li .slider-edit {
+.slider-group .slider-group-ul .slider-group-li .slider-edit {
   line-height: 70rpx;
 }
-.slider-group > ul > li .slider-edit .slider-edit-icon {
+.slider-group .slider-group-ul .slider-group-li .slider-edit .slider-edit-icon {
   margin-left: 30rpx;
   font-size: 40rpx;
   color: #f0c471;
 }
-.slider-group > ul > li .slider-edit text:last-of-type {
+.slider-group .slider-group-ul .slider-group-li .slider-edit text:last-of-type {
   float: right;
   margin-right: 10rpx;
 }
-.slider-group > ul > li .input-edit {
+.slider-group .slider-group-ul .slider-group-li .input-edit {
   width: 280rpx !important;
 }
 .input-edit {

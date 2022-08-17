@@ -80,5 +80,15 @@ import {ref, reactive} from "vue"
 ### [08161741]
 
 - custom页面样式基本完成，模式切换没做
-- 【待解决】节流传参
+- 【待解决】节流传参 √ ----------- 箭头函数没有arguments
 - 用了pinia做状态管理
+
+### [08171630]
+
+- 因为有些标签微信小程序里不支持，比如ul li,所以写样式时，尽量还是用class
+- 增加custom按钮/开关切换功能
+- joystick custom页面 onShow发送一次数据，做初始化
+- 增加下拉刷新搜索开放蓝牙discovery 3秒后关闭
+- 增加连接设备异常时处理
+- 增加首页  cartoon
+- 【已提交】

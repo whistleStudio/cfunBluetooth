@@ -2,7 +2,7 @@
 var common_vendor = require("../../common/vendor.js");
 var hooks_useJoyAxis = require("../../hooks/useJoyAxis.js");
 var hooks_useJoyBtn = require("../../hooks/useJoyBtn.js");
-require("../../utils/bt.js");
+var utils_bt = require("../../utils/bt.js");
 const _sfc_main = {
   __name: "joystick",
   setup(__props) {
@@ -15,6 +15,9 @@ const _sfc_main = {
       const sysInfo = common_vendor.index.getSystemInfoSync();
       wH.value = sysInfo.windowHeight;
       wW.value = sysInfo.windowWidth;
+    });
+    common_vendor.onShow(() => {
+      utils_bt.bt.writeBuffer([221, 119, 50, 50, 0, 0, 0, 0]);
     });
     return (_ctx, _cache) => {
       return {

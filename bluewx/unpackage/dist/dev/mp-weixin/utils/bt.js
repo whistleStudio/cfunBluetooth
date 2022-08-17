@@ -27,10 +27,14 @@ var bt = {
           rsv(res);
         },
         fail(e) {
+          console.log(e);
           rej(e);
         }
       });
     });
+  },
+  stopSearch() {
+    stopDevDiscovery();
   },
   async connectDev(devId) {
     this.devId = devId;
@@ -41,6 +45,9 @@ var bt = {
       this.chaId = await getDevCharacteristics(this.devId, this.svId);
       return true;
     } catch (e) {
+      $hint("\u8BBE\u5907\u8FDE\u63A5\u5F02\u5E38");
+      console.log("connect fail -- ", e);
+      return false;
     }
   },
   disconnectDev() {
@@ -113,6 +120,7 @@ function createConnect(deviceId) {
   });
 }
 function stopDevDiscovery() {
+  console.log("stopDiscovery");
   common_vendor.index.stopBluetoothDevicesDiscovery({
     success(res) {
       console.log(res);

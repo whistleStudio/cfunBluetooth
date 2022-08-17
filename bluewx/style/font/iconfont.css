@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-qiehuan:before {
+  content: "\e607";
+}
+
 .icon-pin:before {
   content: "\e9f3";
 }

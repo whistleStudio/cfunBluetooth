@@ -27,10 +27,12 @@ export default {
 			    console.log("search--", res)
 					rsv(res)
 			  },
-				fail(e) {rej(e)}
+				fail(e) {console.log(e);rej(e)}
 			})
 		})
 	},
+	/* 停止搜索 */
+	stopSearch () {stopDevDiscovery()},
 	/* 设备连接 */
 	async connectDev (devId) {
 		this.devId = devId
@@ -40,7 +42,11 @@ export default {
 			this.svId = await getDevService(this.devId)
 			this.chaId = await getDevCharacteristics(this.devId, this.svId)
 			return true
-		} catch(e) {"connect fail -- ", e}
+		} catch(e) {
+			$hint("设备连接异常")
+			console.log("connect fail -- ", e);
+			return false
+		}
 	},
 	/* 断开连接 */
 	disconnectDev () {
@@ -121,6 +127,7 @@ function createConnect (deviceId) {
 
 /* 2 停止搜寻附近的蓝牙外围设备,减少功耗 */
 function stopDevDiscovery () {
+	console.log("stopDiscovery")
 	uni.stopBluetoothDevicesDiscovery({
 	  success(res) {
 	    console.log(res)

@@ -1,2 +1,3 @@
-const a = [0,0,0,0]
-a[0] = 1
+for (let i in Array(4).fill(0)) {
+	console.log(i, typeof i)
+}

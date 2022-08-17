@@ -4,7 +4,7 @@ var throttle = {
   invLimit(fn, opt = { inv: 200 }) {
     let validate = true;
     let tim = 0;
-    return () => {
+    return function() {
       if (validate)
         fn(...arguments);
       else

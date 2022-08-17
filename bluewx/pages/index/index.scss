@@ -1,0 +1,69 @@
+	$gap: 10rpx;
+	.top {
+		width: 100%;
+		position: fixed;
+		background-color: white;
+		height: 150rpx;
+		box-sizing: border-box;
+		.head {
+			width: 100%;
+			height: 100rpx;
+			font: $fontF;
+			text {
+				color: $gray100;
+			}
+			switch {
+				margin-left: auto;
+			}
+		}
+		>text {
+			display: block;
+			font: 30rpx/50rpx $fontF;
+			background-color: $mainColor;
+			color: white;
+		}
+	}
+	.dev-list {
+		font: $fontF;
+		box-sizing: border-box;
+		.dev-list-ul {
+			padding: calc(150rpx + $gap) 0 calc(55px + $gap);
+			.dev-list-li {
+				font: 35rpx/80rpx $fontF;
+				background-color: $gray250;
+				margin-bottom: 10rpx;
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+				>view {
+					width: 60rpx;
+					height: 60rpx;
+					margin-left: auto;
+					margin-right: 15rpx;
+					font-size: 40rpx;
+					line-height: 60rpx;
+					color: $decorateColor;
+				}
+				.connecting {
+					background: url("@/static/font/connecting.gif") center/contain no-repeat;
+				}
+			}
+		}
+	}
+	.bt-cartoon {
+		position: fixed;
+		bottom: 80rpx;
+		right: 30rpx;
+		width: 200rpx;
+		height: 260rpx;
+		background: url("https://dict.cfunworld.com/img/public/btCartoon.png") center/contain no-repeat;
+	}
+	// --------小程序真机调试用------
+	// .dev-list-ul {
+	// 	padding: calc(150rpx + 10rpx) 0 calc(55px + 10rpx);
+	// }
+	// .dev-list-li {
+	// 	line-height: 80rpx;
+	// 	background-color: lightskyblue;
+	// 	margin-bottom: 10rpx;
+	// }
