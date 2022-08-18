@@ -26,7 +26,7 @@
 
 <script setup>
 	import {reactive, toRefs, onMounted} from "vue"
-	import {onPullDownRefresh} from "@dcloudio/uni-app"
+	import {onPullDownRefresh, onShareAppMessage, onShareTimeline} from "@dcloudio/uni-app"
 	
 	// #ifdef MP-WEIXIN
 	import bt from "@/utils/bt.js"
@@ -105,6 +105,19 @@
 			})
 		}
 
+	})
+	/* 允许分享 */
+	onShareAppMessage(()=>{
+		return {
+			title: "创趣蓝牙小程序",
+			path: '/pages/index/index'
+		}
+	})
+	onShareTimeline(()=>{
+		return {
+			title: "创趣蓝牙小程序",
+			path: '/pages/index/index'
+		}
 	})
 	// #endif
 </script>

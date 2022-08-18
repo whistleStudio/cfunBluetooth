@@ -6740,6 +6740,8 @@ const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
 };
 const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
+const onShareTimeline = /* @__PURE__ */ createHook(ON_SHARE_TIMELINE);
+const onShareAppMessage = /* @__PURE__ */ createHook(ON_SHARE_APP_MESSAGE);
 exports.Pinia = Pinia;
 exports._export_sfc = _export_sfc;
 exports.createPinia = createPinia;
@@ -6753,6 +6755,8 @@ exports.o = o;
 exports.onBeforeMount = onBeforeMount;
 exports.onMounted = onMounted;
 exports.onPullDownRefresh = onPullDownRefresh;
+exports.onShareAppMessage = onShareAppMessage;
+exports.onShareTimeline = onShareTimeline;
 exports.onShow = onShow;
 exports.reactive = reactive;
 exports.ref = ref;

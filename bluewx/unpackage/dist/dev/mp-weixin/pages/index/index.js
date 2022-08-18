@@ -74,6 +74,18 @@ const _sfc_main = {
         });
       }
     });
+    common_vendor.onShareAppMessage(() => {
+      return {
+        title: "\u521B\u8DA3\u84DD\u7259\u5C0F\u7A0B\u5E8F",
+        path: "/pages/index/index"
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: "\u521B\u8DA3\u84DD\u7259\u5C0F\u7A0B\u5E8F",
+        path: "/pages/index/index"
+      };
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.o(switchChange),
@@ -96,4 +108,5 @@ const _sfc_main = {
   }
 };
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/43542/Documents/WorkSpace/CFun World/j. \u7F51\u7AD9/cfunblue/bluewx/pages/index/index.vue"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);
