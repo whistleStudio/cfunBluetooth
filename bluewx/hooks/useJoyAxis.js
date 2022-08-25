@@ -5,8 +5,8 @@ import bt from "@/utils/bt.js"
 export default function (btArr) {
 	const D=160, d=70
 	const InitX = (D-d)/2, InitY = (D-d)/2
-	let tim1 = 0, tim2 = 0//节流计时器
-	
+	let tim1 = 0, tim2 = 0//防抖、节流计时器
+	let validate1 = true //节流校验标志
 	
 	const joySta = reactive({
 		x: InitX,
@@ -26,16 +26,20 @@ export default function (btArr) {
 		joySta.oldY = y
 		if (source==="touch") {
 			arrowPos(x, y)
-			//传蓝牙
-			clearTimeout(tim1)
-			tim1 = setTimeout(()=>{
-				let btX = x/(D-d)*100, btY = y/(D-d)*100
-				btArr[2] = btY
-				btArr[3] = btX
-				let buffer = new Uint8Array(btArr).buffer
-				console.log(buffer)
-				bt.writeBuffer(buffer)
-			},200)
+			// 传蓝牙-防抖
+			// clearTimeout(tim1)
+			// tim1 = setTimeout(()=>{
+			// 	let btX = x/(D-d)*200-100, btY = y/(D-d)*200-100
+			// 	writeAxisBuf (btArr, btY, btX)
+			// },200)
+			
+			// 传蓝牙-节流
+			if (validate1) {
+				let btX = x/(D-d)*200-100, btY = y/(D-d)*200-100
+				writeAxisBuf (btArr, btY, btX)
+				validate1 = false
+				setTimeout(()=>validate1=true, 100)
+			} else clearInterval(tim1)
 		}
 	}
 	/* 十字轴开始移动 */
@@ -53,15 +57,23 @@ export default function (btArr) {
 				joySta.x = InitX
 				joySta.y = InitY
 		})
-		//传蓝牙
-		clearTimeout(tim2)
-		tim2 = setTimeout(()=>{
-			btArr[2] = 50
-			btArr[3] = 50
-			let buffer = new Uint8Array(btArr).buffer
-			bt.writeBuffer(buffer)
-		},220)
+		//传蓝牙-防抖
+		// clearTimeout(tim2)
+		// tim2 = setTimeout(()=>{
+		// 	writeAxisBuf (btArr, 0, 0)
+		// },220)
+		//传蓝牙-不防抖
+		writeAxisBuf (btArr, 0, 0)
 	}
+	
+	function writeAxisBuf (btArr, v2, v3) {
+		console.log(v2, v3)
+		btArr[2] = v2
+		btArr[3] = v3
+		let buffer = new Uint8Array(btArr).buffer
+		bt.writeBuffer(buffer)
+	}
+	
 	/* 定位十字轴箭头位置 */
 	function arrowPos (x,y) {
 		x = x-InitX

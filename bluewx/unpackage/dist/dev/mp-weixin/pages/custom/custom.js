@@ -10,7 +10,7 @@ const _sfc_main = {
     const cmState = common_vendor.reactive({
       btnMode: 1,
       editIdx: -1,
-      arrBuf: [221, 119, 50, 50, 0, 0, 0, 0]
+      arrBuf: [221, 119, 0, 0, 0, 0, 0, 0]
     });
     common_vendor.onShow(() => {
       btWrite();

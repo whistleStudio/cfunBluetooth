@@ -33,7 +33,7 @@
 					<input @blur="ipBlur" @confirm="ipConfirm(i, $event)" type="text" placeholder="≤7个字符" placeholder-style="color:rgb(180,180,180)">
 				</view>
 				<!-- 滑杆 -->
-				<slider activeColor=" #4dc7f1" @change="sliderChange(i, $event)" :value="customStore.staArr[i]"/>
+				<slider activeColor=" #4dc7f1" @change="sliderChange(i, $event)" :value="customStore.staArr[i]" min="-100" max="100"/>
 			</li>
 		</ul>
 	</view>
@@ -53,7 +53,7 @@
 	const cmState = reactive({
 		btnMode: 1,
 		editIdx: -1,
-		arrBuf: [0xdd, 0x77, 50, 50, 0, 0, 0, 0]
+		arrBuf: [0xdd, 0x77, 0, 0, 0, 0, 0, 0]
 	})
   onShow(() => {
 		btWrite()

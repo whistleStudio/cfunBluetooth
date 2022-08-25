@@ -20,7 +20,7 @@
 	import {onHide,onShow} from '@dcloudio/uni-app'
 	import bt from "@/utils/bt.js"
 	
-	const btArr = [0xdd, 0x77, 50, 50, 0, 0, 0, 0]
+	const btArr = [0xdd, 0x77, 0, 0, 0, 0, 0, 0]
 	const {joySta, mvMove, mvStart, mvRelease, arrowPos} = useJoyAxis(btArr)
 	const {btnSta, btnTouchStart, btnTouchEnd} = useJoyBtn(btArr)
 	
@@ -32,7 +32,7 @@
 		wW.value = sysInfo.windowWidth
 	})
 	onShow(()=>{
-		bt.writeBuffer([0xdd, 0x77, 50, 50, 0, 0, 0, 0])
+		bt.writeBuffer(new Uint8Array([0xdd, 0x77, 0, 0, 0, 0, 0, 0]).buffer)
 	})
 </script>
 

@@ -6,7 +6,7 @@ var utils_bt = require("../../utils/bt.js");
 const _sfc_main = {
   __name: "joystick",
   setup(__props) {
-    const btArr = [221, 119, 50, 50, 0, 0, 0, 0];
+    const btArr = [221, 119, 0, 0, 0, 0, 0, 0];
     const { joySta, mvMove, mvStart, mvRelease, arrowPos } = hooks_useJoyAxis.useJoyAxis(btArr);
     const { btnSta, btnTouchStart, btnTouchEnd } = hooks_useJoyBtn.useJoyBtn(btArr);
     let wH = common_vendor.ref(0);
@@ -17,7 +17,7 @@ const _sfc_main = {
       wW.value = sysInfo.windowWidth;
     });
     common_vendor.onShow(() => {
-      utils_bt.bt.writeBuffer([221, 119, 50, 50, 0, 0, 0, 0]);
+      utils_bt.bt.writeBuffer(new Uint8Array([221, 119, 0, 0, 0, 0, 0, 0]).buffer);
     });
     return (_ctx, _cache) => {
       return {

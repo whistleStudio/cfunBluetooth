@@ -4,7 +4,8 @@ var utils_bt = require("../utils/bt.js");
 function useJoyAxis(btArr) {
   const D = 160, d = 70;
   const InitX = (D - d) / 2, InitY = (D - d) / 2;
-  let tim1 = 0, tim2 = 0;
+  let tim1 = 0;
+  let validate1 = true;
   const joySta = common_vendor.reactive({
     x: InitX,
     y: InitY,
@@ -20,15 +21,13 @@ function useJoyAxis(btArr) {
     joySta.oldY = y;
     if (source === "touch") {
       arrowPos(x, y);
-      clearTimeout(tim1);
-      tim1 = setTimeout(() => {
-        let btX = x / (D - d) * 100, btY = y / (D - d) * 100;
-        btArr[2] = btY;
-        btArr[3] = btX;
-        let buffer = new Uint8Array(btArr).buffer;
-        console.log(buffer);
-        utils_bt.bt.writeBuffer(buffer);
-      }, 200);
+      if (validate1) {
+        let btX = x / (D - d) * 200 - 100, btY = y / (D - d) * 200 - 100;
+        writeAxisBuf(btArr, btY, btX);
+        validate1 = false;
+        setTimeout(() => validate1 = true, 100);
+      } else
+        clearInterval(tim1);
     }
   }
   function mvStart() {
@@ -44,13 +43,14 @@ function useJoyAxis(btArr) {
       joySta.x = InitX;
       joySta.y = InitY;
     });
-    clearTimeout(tim2);
-    tim2 = setTimeout(() => {
-      btArr[2] = 50;
-      btArr[3] = 50;
-      let buffer = new Uint8Array(btArr).buffer;
-      utils_bt.bt.writeBuffer(buffer);
-    }, 220);
+    writeAxisBuf(btArr, 0, 0);
+  }
+  function writeAxisBuf(btArr2, v2, v3) {
+    console.log(v2, v3);
+    btArr2[2] = v2;
+    btArr2[3] = v3;
+    let buffer = new Uint8Array(btArr2).buffer;
+    utils_bt.bt.writeBuffer(buffer);
   }
   function arrowPos(x, y) {
     x = x - InitX;

@@ -100,3 +100,10 @@ import {ref, reactive} from "vue"
 ### [08251010]
 
 - 修复ios 下拉刷新，蓝牙搜索列表重复问题
+
+### [08251556]
+
+- joystick 虚拟十字轴 发送数据 防抖-》节流
+- 取值区间[-100,100]
+- 修正joystick onShow发送数据格式为buffer类型
+
