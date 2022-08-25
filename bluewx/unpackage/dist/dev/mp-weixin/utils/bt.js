@@ -94,13 +94,17 @@ var bt = {
     });
   },
   onFound(devList) {
+    let sysInfo = common_vendor.index.getSystemInfoSync();
     common_vendor.index.onBluetoothDeviceFound(function(res) {
       var _a;
       if ((_a = res == null ? void 0 : res.devices[0]) == null ? void 0 : _a.name) {
         let dev = res.devices[0];
         console.log("new device list has founded");
-        console.dir(res);
-        devList.push({ name: dev.name, deviceId: dev.deviceId });
+        if (sysInfo.osName == "ios") {
+          if (devFilter(devList, dev))
+            devList.push({ name: dev.name, deviceId: dev.deviceId });
+        } else
+          devList.push({ name: dev.name, deviceId: dev.deviceId });
       }
     });
   }
@@ -178,6 +182,14 @@ function getDevCharacteristics(deviceId, serviceId) {
       }
     });
   });
+}
+function devFilter(devList, dev) {
+  let isNew = true;
+  devList.forEach((e) => {
+    if (dev.name == e.name)
+      isNew = false;
+  });
+  return isNew;
 }
 function $hint(err, icon = "error") {
   common_vendor.index.showToast({

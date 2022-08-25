@@ -96,12 +96,15 @@ export default {
 	},
 	/* 搜索监听 */
 	onFound (devList) {
+		let sysInfo = uni.getSystemInfoSync()
 		uni.onBluetoothDeviceFound(function (res) {
 			if (res?.devices[0]?.name) {
 				let dev = res.devices[0]
 				console.log('new device list has founded')
-				console.dir(res)
-				devList.push({name: dev.name, deviceId: dev.deviceId})
+				// console.dir(res)
+				if (sysInfo.osName == "ios") {
+					if (devFilter(devList, dev)) devList.push({name: dev.name, deviceId: dev.deviceId})
+				} else devList.push({name: dev.name, deviceId: dev.deviceId})
 			}
 		})
 	},
@@ -186,6 +189,15 @@ function getDevCharacteristics (deviceId, serviceId) {
 			fail(e) {console.log(e)}
 		})
 	})
+}
+
+/* ios设备下拉再次搜索重名问题，过滤同名 */
+function devFilter (devList, dev) {
+	let isNew = true
+	devList.forEach(e => {
+		if (dev.name == e.name) isNew = false
+	})
+	return isNew
 }
 
 

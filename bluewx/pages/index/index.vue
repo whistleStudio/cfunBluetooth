@@ -31,12 +31,12 @@
 	// #ifdef MP-WEIXIN
 	import bt from "@/utils/bt.js"
 	// #endif
-	
+
 	let iState = reactive({
 		isBtInit: false, 
 		devList: [],
 		actId: -1,
-		mode: -1
+		mode: -1,
 	})
 	// #ifdef MP-WEIXIN
 	/* 开关状态监控 */
